@@ -1,0 +1,25 @@
+{
+  "entities": {
+    "Game": {
+      "title": "Game",
+      "description": "Information about an unblocked game",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier for the game" },
+        "title": { "type": "string", "description": "Title of the game" },
+        "url": { "type": "string", "description": "URL of the game iframe" },
+        "thumbnail": { "type": "string", "description": "URL of the game thumbnail" },
+        "category": { "type": "string", "description": "Category of the game" },
+        "addedBy": { "type": "string", "description": "UID of the user who added the game" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" }
+      },
+      "required": ["id", "title", "url", "category", "addedBy", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/games/{gameId}": {
+      "schema": "Game",
+      "description": "Collection of unblocked games"
+    }
+  }
+}

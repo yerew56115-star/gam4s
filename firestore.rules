@@ -1,0 +1,36 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner() {
+      return isSignedIn() && 
+             request.auth.token.email == "yerew56115@aperiol.com" && 
+             request.auth.token.email_verified == true;
+    }
+
+    function isValidGame(data) {
+      return data.id is string && data.id.size() <= 128 &&
+             data.title is string && data.title.size() <= 128 &&
+             data.url is string && data.url.size() <= 512 &&
+             data.category is string && data.category.size() <= 64 &&
+             data.addedBy == request.auth.uid &&
+             data.createdAt == request.time;
+    }
+
+    match /games/{gameId} {
+      allow read: if true; // Games are public to view
+      allow create: if isOwner() && isValidGame(request.resource.data);
+      allow update: if isOwner() && isValidGame(request.resource.data) && 
+                      request.resource.data.addedBy == resource.data.addedBy;
+      allow delete: if isOwner();
+    }
+  }
+}
