@@ -1,34 +1,21 @@
-# Stealth Arcade
+# Stealth Arcade Deployment Guide 🚀
 
-A high-performance unblocked game portal with real-time Firestore synchronization.
+If you are seeing a **white screen**, you are likely uploading the wrong files.
 
-## Features
-- **Real-time Database**: Syncs with Firebase Firestore instantly.
-- **Stealth Design**: Professional, technical aesthetic using Tailwind CSS.
-- **Management System**: Owner-only game injection and management.
-- **Iframe Integration**: Supports direct URLs and embed codes.
+## 1. How to Deploy (FIX WHITE SCREEN)
+When you export/download this project, you CANNOT simply upload all the files to GitHub. You must **BUILD** it first:
 
-## Deployment to GitHub Pages
+1. Open a terminal in the project folder.
+2. Run `npm install` then `npm run build`.
+3. This creates a folder named **`dist`**.
+4. **ONLY** upload the contents of the `dist` folder to your GitHub repository.
+5. If you see the error "LOAD_ERROR", it means the browser can't find the bundled JavaScript files.
 
-1. **Build the Project**:
-   Run `npm run build`. This will generate a `dist/` folder.
-   
-2. **Handle Paths**:
-   The project is configured with `base: './'` in `vite.config.ts`. This ensures that assets are loaded correctly regardless of whether the app is hosted at the root or a subfolder.
+## 2. GitHub Pages Settings
+- Go to your GitHub Repo -> **Settings** -> **Pages**.
+- Set the source to "Deploy from a branch" (usually `main`).
+- Ensure your `index.html` is at the **root** of the branch you are deploying.
 
-3. **Deploy Artifacts**:
-   Upload the contents of the `dist/` folder to your GitHub repository's `gh-pages` branch or the root of your deployment branch.
+## 3. Configuration
+Your Firebase credentials are stored in `src/firebase-applet-config.json`. This is automatically included in the build.
 
-## Configuration
-
-### Firebase Setup
-Ensure `firebase-applet-config.json` is present in the root directory. This contains your project's Firebase credentials.
-
-### Owner Access
-To manage games, sign in with the Google account associated with the admin email defined in `src/App.tsx`.
-
-## Development
-```bash
-npm install
-npm run dev
-```
