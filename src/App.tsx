@@ -36,13 +36,18 @@ export default function App() {
     console.log("CONNECTED");
     const unsubAuth = onAuthStateChanged(auth, (u) => setUser(u));
     const q = query(collection(db, 'games'), orderBy('createdAt', 'desc'));
-    const unsubGames = onSnapshot(q, (snapshot) => {
-      const gameList = snapshot.docs.map(doc => ({
-        ...doc.data(),
-        id: doc.id
-      })) as Game[];
-      setGames(gameList);
-    });
+    const unsubGames = onSnapshot(q, 
+      (snapshot) => {
+        const gameList = snapshot.docs.map(doc => ({
+          ...doc.data(),
+          id: doc.id
+        })) as Game[];
+        setGames(gameList);
+      },
+      (error) => {
+        console.error("Firestore snapshot error:", error);
+      }
+    );
 
     return () => {
       unsubAuth();

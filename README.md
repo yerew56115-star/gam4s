@@ -1,20 +1,34 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Stealth Arcade
 
-# Run and deploy your AI Studio app
+A high-performance unblocked game portal with real-time Firestore synchronization.
 
-This contains everything you need to run your app locally.
+## Features
+- **Real-time Database**: Syncs with Firebase Firestore instantly.
+- **Stealth Design**: Professional, technical aesthetic using Tailwind CSS.
+- **Management System**: Owner-only game injection and management.
+- **Iframe Integration**: Supports direct URLs and embed codes.
 
-View your app in AI Studio: https://ai.studio/apps/4c17d6e3-6af2-4a36-8fff-522f692fb837
+## Deployment to GitHub Pages
 
-## Run Locally
+1. **Build the Project**:
+   Run `npm run build`. This will generate a `dist/` folder.
+   
+2. **Handle Paths**:
+   The project is configured with `base: './'` in `vite.config.ts`. This ensures that assets are loaded correctly regardless of whether the app is hosted at the root or a subfolder.
 
-**Prerequisites:**  Node.js
+3. **Deploy Artifacts**:
+   Upload the contents of the `dist/` folder to your GitHub repository's `gh-pages` branch or the root of your deployment branch.
 
+## Configuration
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+### Firebase Setup
+Ensure `firebase-applet-config.json` is present in the root directory. This contains your project's Firebase credentials.
+
+### Owner Access
+To manage games, sign in with the Google account associated with the admin email defined in `src/App.tsx`.
+
+## Development
+```bash
+npm install
+npm run dev
+```
