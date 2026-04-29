@@ -3,6 +3,10 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/
 import { getFirestore } from 'firebase/firestore';
 import firebaseConfig from '../../firebase-applet-config.json';
 
+if (!firebaseConfig || !firebaseConfig.projectId) {
+  console.error("Firebase configuration missing or invalid. Application may not function correctly.");
+}
+
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
 export const auth = getAuth(app);
