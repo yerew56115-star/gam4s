@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
-import firebaseConfig from '../../firebase-applet-config.json';
+import firebaseConfig from '../firebase-applet-config.json';
 
 if (!firebaseConfig || !firebaseConfig.projectId) {
   console.error("Firebase configuration missing or invalid. Application may not function correctly.");
