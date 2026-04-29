@@ -34,15 +34,32 @@
       };
     </script>
     <div id="root">
-      <div style="background:#0c0c0e;color:#4f46e5;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:ui-monospace,monospace;">
-        <div style="width:40px;height:40px;border:3px solid #18181b;border-top-color:#4f46e5;border-radius:50%;animation:spin 1s linear infinite;"></div>
-        <p style="margin-top:20px;font-size:10px;text-transform:uppercase;letter-spacing:0.2em;">Initializing Stealth Node...</p>
+      <div style="background:#0c0c0e;color:#4f46e5;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:ui-monospace,monospace;text-align:center;">
+        <div id="spinner" style="width:40px;height:40px;border:3px solid #18181b;border-top-color:#4f46e5;border-radius:50%;animation:spin 1s linear infinite;"></div>
+        <p id="loading-text" style="margin-top:20px;font-size:10px;text-transform:uppercase;letter-spacing:0.2em;">Initializing Stealth Node...</p>
+        <div id="debug-info" style="margin-top:40px;font-size:8px;color:#3f3f46;max-width:300px;line-height:1.5;">
+          Checking system integrity...
+        </div>
         <style>
           @keyframes spin { to { transform: rotate(360deg); } }
         </style>
+        <script>
+          // Automatic Timeout Check
+          setTimeout(() => {
+            const root = document.getElementById('root');
+            if (root && root.innerHTML.includes('spinner')) {
+              document.getElementById('loading-text').innerText = "CONNECTION_STALLED";
+              document.getElementById('debug-info').innerHTML = "The script is taking too long to respond. <br/> <b>ACTION:</b> Ensure you are using the <b>dist</b> folder on GitHub Pages.<br/><button onclick='location.reload()' style='margin-top:20px;background:#1e1e24;color:#4f46e5;border:1px solid #4f46e5;padding:5px 10px;font-size:8px;cursor:pointer;'>FORCE_RETRY</button>";
+            }
+          }, 8000);
+        </script>
       </div>
     </div>
-    <script type="module" src="./src/main.tsx"></script>
+    <script 
+      type="module" 
+      src="./src/main.tsx" 
+      onerror="window.onerror('Failed to load the main script module. This usually means the file path is incorrect in the build.')"
+    ></script>
   </body>
 </html>
 
